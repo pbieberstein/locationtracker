@@ -11,12 +11,6 @@
     <title>Hike Tracker</title>
     <link rel="preconnect" href="https://unpkg.com" crossorigin />
     <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIINfQ3ynh1MZiqx5JkMZQxMZ+H4rceR8LY="
-      crossorigin=""
-    />
     <script>
       // GitHub Pages uses /REPOSITORY/. Its 404 fallback also lets /PHONE_HASH work.
       window.HIKE_TRACKER_BASE_PATH = window.HIKE_TRACKER_BASE_PATH || (() => {
@@ -28,6 +22,10 @@
       const stylesheet = document.createElement('link');
       stylesheet.rel = 'stylesheet';
       stylesheet.href = `${window.HIKE_TRACKER_BASE_PATH}styles.css`;
+      window.HIKE_TRACKER_STYLES_READY = new Promise((resolve) => {
+        stylesheet.addEventListener('load', resolve, { once: true });
+        stylesheet.addEventListener('error', resolve, { once: true });
+      });
       document.head.appendChild(stylesheet);
     </script>
   </head>
@@ -82,7 +80,8 @@
       crossorigin=""
     ></script>
     <script type="module">
-      import(`${window.HIKE_TRACKER_BASE_PATH}app.js`);
+      await window.HIKE_TRACKER_STYLES_READY;
+      await import(`${window.HIKE_TRACKER_BASE_PATH}app.js`);
     </script>
   </body>
 </html>
