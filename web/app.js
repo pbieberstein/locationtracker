@@ -66,9 +66,9 @@ function ensureMap() {
     zoomControl: true,
     preferCanvas: true,
     scrollWheelZoom: true,
-    wheelDebounceTime: 12,
-    wheelPxPerZoomLevel: 120,
-    zoomSnap: 0.1,
+    wheelDebounceTime: 20,
+    wheelPxPerZoomLevel: 100,
+    zoomSnap: 0.25,
     zoomDelta: 0.5,
     zoomAnimation: true,
     fadeAnimation: true,
@@ -80,9 +80,6 @@ function ensureMap() {
   }).setView([49.2827, -123.1207], 10);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
-    detectRetina: true,
-    keepBuffer: 4,
-    updateWhenIdle: false,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
   historyLayer = L.layerGroup().addTo(map);
@@ -129,10 +126,14 @@ function renderMap(history, fingerprint) {
   }).bindPopup(`<strong>Current location</strong><br>${formatCoordinates(latest)}`).addTo(map);
 
   if (!lastFingerprint) {
-    const bounds = L.latLngBounds(points);
-    map.fitBounds(bounds, { padding: [48, 48], maxZoom: 15 });
+    if (points.length === 1) {
+      map.setView(points[0], 13, { animate: false });
+    } else {
+      const bounds = L.latLngBounds(points);
+      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 15, animate: false });
+    }
   } else if (lastFingerprint !== fingerprint && !map.getBounds().pad(-0.15).contains(currentMarker.getLatLng())) {
-    map.panTo(currentMarker.getLatLng());
+    map.panTo(currentMarker.getLatLng(), { animate: true, duration: 0.45 });
   }
   lastFingerprint = fingerprint;
   lastMapRenderKey = renderKey;
