@@ -4,9 +4,9 @@
     "lastLocation": {
       "latitude": 46.6512,
       "longitude": 58.4136,
-      "timestamp": "2026-08-08T05:50:07.778Z",
+      "timestamp": "2026-08-08T05:51:34.759Z",
       "sourceFormat": "decimal_degrees",
-      "fingerprint": "1522b937716eb36e81d63fd057410e0d56ede9e6b3872572324a79603b0aa9bd"
+      "fingerprint": "4f400c18389709e3ef7436cc08a761760319e695f4dc59a5b46974c44c222a30"
     },
     "history": [
       {
@@ -22,6 +22,13 @@
         "timestamp": "2026-08-08T05:50:07.778Z",
         "sourceFormat": "decimal_degrees",
         "fingerprint": "1522b937716eb36e81d63fd057410e0d56ede9e6b3872572324a79603b0aa9bd"
+      },
+      {
+        "latitude": 46.6512,
+        "longitude": 58.4136,
+        "timestamp": "2026-08-08T05:51:34.759Z",
+        "sourceFormat": "decimal_degrees",
+        "fingerprint": "4f400c18389709e3ef7436cc08a761760319e695f4dc59a5b46974c44c222a30"
       }
     ]
   }
