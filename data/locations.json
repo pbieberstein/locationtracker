@@ -1,1 +1,21 @@
-{}
+{
+  "b9ec580cdb8730d58e79e61dfe354f657422de57937a718d812d90ecef7652b2": {
+    "phoneHash": "b9ec580cdb8730d58e79e61dfe354f657422de57937a718d812d90ecef7652b2",
+    "lastLocation": {
+      "latitude": 49.2827,
+      "longitude": -123.1207,
+      "timestamp": "2026-08-08T05:46:34.371Z",
+      "sourceFormat": "decimal_degrees",
+      "fingerprint": "57cba7274c0e08f1fa43c83e9e89997f9e285095b1c7ba4aeb84d3f8b94b0ef4"
+    },
+    "history": [
+      {
+        "latitude": 49.2827,
+        "longitude": -123.1207,
+        "timestamp": "2026-08-08T05:46:34.371Z",
+        "sourceFormat": "decimal_degrees",
+        "fingerprint": "57cba7274c0e08f1fa43c83e9e89997f9e285095b1c7ba4aeb84d3f8b94b0ef4"
+      }
+    ]
+  }
+}
