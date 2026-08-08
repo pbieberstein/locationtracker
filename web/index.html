@@ -19,7 +19,7 @@
           ? `/${parts[0]}/`
           : `${window.location.pathname.replace(/[^/]*$/, '')}`;
       })();
-      window.HIKE_TRACKER_ASSET_VERSION = '20260808-map-layout';
+      window.HIKE_TRACKER_ASSET_VERSION = '20260808-map-zoom';
       const stylesheet = document.createElement('link');
       stylesheet.rel = 'stylesheet';
       stylesheet.href = `${window.HIKE_TRACKER_BASE_PATH}styles.css?v=${window.HIKE_TRACKER_ASSET_VERSION}`;
