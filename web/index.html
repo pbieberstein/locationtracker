@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#18231c" />
+    <meta
+      name="description"
+      content="A lightweight map showing the latest satellite hike check-in and location history."
+    />
+    <title>Hike Tracker</title>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
+    <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIINfQ3ynh1MZiqx5JkMZQxMZ+H4rceR8LY="
+      crossorigin=""
+    />
+    <script>
+      // GitHub Pages uses /REPOSITORY/. Its 404 fallback also lets /PHONE_HASH work.
+      window.HIKE_TRACKER_BASE_PATH = window.HIKE_TRACKER_BASE_PATH || (() => {
+        const parts = window.location.pathname.split('/').filter(Boolean);
+        return window.location.hostname.endsWith('.github.io') && parts.length
+          ? `/${parts[0]}/`
+          : `${window.location.pathname.replace(/[^/]*$/, '')}`;
+      })();
+      const stylesheet = document.createElement('link');
+      stylesheet.rel = 'stylesheet';
+      stylesheet.href = `${window.HIKE_TRACKER_BASE_PATH}styles.css`;
+      document.head.appendChild(stylesheet);
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Hike Tracker home">
+        <span class="brand-mark" aria-hidden="true">▲</span>
+        <span>Hike Tracker</span>
+      </a>
+      <span class="live-status"><i aria-hidden="true"></i> Live trail</span>
+    </header>
+
+    <main>
+      <section class="location-summary" aria-labelledby="summary-heading">
+        <p class="eyebrow" id="summary-heading">Last location</p>
+        <h1 id="coordinates">Waiting for a trail…</h1>
+        <p class="updated" id="updated-at" aria-live="polite">Loading location data</p>
+      </section>
+
+      <section class="map-shell" aria-label="Hiker location map">
+        <div id="map"></div>
+        <div id="map-empty" class="map-empty" hidden>
+          <span aria-hidden="true">⌖</span>
+          <p id="empty-message">No location received yet.</p>
+        </div>
+        <div class="map-key" id="map-key" hidden>
+          <span><i class="current-dot"></i> Current</span>
+          <span><i class="trail-line"></i> Trail</span>
+        </div>
+      </section>
+
+      <section class="history-section" aria-labelledby="history-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Trail log</p>
+            <h2 id="history-heading">Location history</h2>
+          </div>
+          <span class="point-count" id="point-count">0 points</span>
+        </div>
+        <ol class="history-list" id="history-list"></ol>
+      </section>
+    </main>
+
+    <footer>
+      <span>Updates automatically every minute</span>
+      <span>Map data © OpenStreetMap contributors</span>
+    </footer>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script type="module">
+      import(`${window.HIKE_TRACKER_BASE_PATH}app.js`);
+    </script>
+  </body>
+</html>
