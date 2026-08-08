@@ -19,9 +19,10 @@
           ? `/${parts[0]}/`
           : `${window.location.pathname.replace(/[^/]*$/, '')}`;
       })();
+      window.HIKE_TRACKER_ASSET_VERSION = '20260808-map-layout';
       const stylesheet = document.createElement('link');
       stylesheet.rel = 'stylesheet';
-      stylesheet.href = `${window.HIKE_TRACKER_BASE_PATH}styles.css`;
+      stylesheet.href = `${window.HIKE_TRACKER_BASE_PATH}styles.css?v=${window.HIKE_TRACKER_ASSET_VERSION}`;
       window.HIKE_TRACKER_STYLES_READY = new Promise((resolve) => {
         stylesheet.addEventListener('load', resolve, { once: true });
         stylesheet.addEventListener('error', resolve, { once: true });
@@ -81,7 +82,7 @@
     ></script>
     <script type="module">
       await window.HIKE_TRACKER_STYLES_READY;
-      await import(`${window.HIKE_TRACKER_BASE_PATH}app.js`);
+      await import(`${window.HIKE_TRACKER_BASE_PATH}app.js?v=${window.HIKE_TRACKER_ASSET_VERSION}`);
     </script>
   </body>
 </html>
