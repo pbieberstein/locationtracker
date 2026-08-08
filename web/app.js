@@ -13,6 +13,7 @@ let currentMarker;
 let historyLayer;
 let trackLine;
 let lastFingerprint = "";
+let lastMapRenderKey = "";
 let trackingHash = "";
 
 function requestedTracker() {
@@ -61,16 +62,49 @@ function formatCoordinates(point) {
 
 function ensureMap() {
   if (map) return;
-  map = L.map("map", { zoomControl: true, preferCanvas: true }).setView([49.2827, -123.1207], 10);
+  map = L.map("map", {
+    zoomControl: true,
+    preferCanvas: true,
+    scrollWheelZoom: true,
+    wheelDebounceTime: 12,
+    wheelPxPerZoomLevel: 120,
+    zoomSnap: 0.1,
+    zoomDelta: 0.5,
+    zoomAnimation: true,
+    fadeAnimation: true,
+    markerZoomAnimation: true,
+    inertia: true,
+    inertiaDeceleration: 2600,
+    inertiaMaxSpeed: 1800,
+    easeLinearity: 0.2,
+  }).setView([49.2827, -123.1207], 10);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
+    detectRetina: true,
+    keepBuffer: 4,
+    updateWhenIdle: false,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
   historyLayer = L.layerGroup().addTo(map);
+
+  // The stylesheet is loaded from a computed GitHub Pages base path. If it
+  // arrives after Leaflet initializes, recompute the viewport once dimensions
+  // settle and whenever the responsive container changes size.
+  requestAnimationFrame(() => map.invalidateSize({ pan: false }));
+  if ("ResizeObserver" in window) {
+    let resizeFrame;
+    new ResizeObserver(() => {
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(() => map.invalidateSize({ pan: false }));
+    }).observe(document.querySelector("#map"));
+  }
 }
 
 function renderMap(history, fingerprint) {
   ensureMap();
+  const renderKey = `${history.length}:${fingerprint}`;
+  if (renderKey === lastMapRenderKey) return;
+
   historyLayer.clearLayers();
   if (trackLine) trackLine.remove();
   if (currentMarker) currentMarker.remove();
@@ -101,6 +135,7 @@ function renderMap(history, fingerprint) {
     map.panTo(currentMarker.getLatLng());
   }
   lastFingerprint = fingerprint;
+  lastMapRenderKey = renderKey;
 }
 
 function renderHistory(history) {
