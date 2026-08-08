@@ -2,11 +2,11 @@
   "b9ec580cdb8730d58e79e61dfe354f657422de57937a718d812d90ecef7652b2": {
     "phoneHash": "b9ec580cdb8730d58e79e61dfe354f657422de57937a718d812d90ecef7652b2",
     "lastLocation": {
-      "latitude": 49.2827,
-      "longitude": -123.1207,
-      "timestamp": "2026-08-08T05:46:34.371Z",
+      "latitude": 46.6512,
+      "longitude": 58.4136,
+      "timestamp": "2026-08-08T05:50:07.778Z",
       "sourceFormat": "decimal_degrees",
-      "fingerprint": "57cba7274c0e08f1fa43c83e9e89997f9e285095b1c7ba4aeb84d3f8b94b0ef4"
+      "fingerprint": "1522b937716eb36e81d63fd057410e0d56ede9e6b3872572324a79603b0aa9bd"
     },
     "history": [
       {
@@ -15,6 +15,13 @@
         "timestamp": "2026-08-08T05:46:34.371Z",
         "sourceFormat": "decimal_degrees",
         "fingerprint": "57cba7274c0e08f1fa43c83e9e89997f9e285095b1c7ba4aeb84d3f8b94b0ef4"
+      },
+      {
+        "latitude": 46.6512,
+        "longitude": 58.4136,
+        "timestamp": "2026-08-08T05:50:07.778Z",
+        "sourceFormat": "decimal_degrees",
+        "fingerprint": "1522b937716eb36e81d63fd057410e0d56ede9e6b3872572324a79603b0aa9bd"
       }
     ]
   }
